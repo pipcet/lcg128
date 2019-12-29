@@ -74,7 +74,7 @@ returned unshifted for efficiency."
 
 (cl-defun lcg128-range (limit &optional (state lcg128--state))
   "Return a random integer in [0,limit) without bias."
-  (let ((nbits (1+ (logb limit))))
+  (let ((nbits (1+ (max 0 (logb (1- limit))))))
     (cl-loop for result = (lcg128-bits nbits state)
              then (lcg128-bits nbits state)
              until (< result limit)
