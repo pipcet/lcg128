@@ -58,7 +58,7 @@ returned unshifted for efficiency."
 
 (cl-defun lcg128-uniform (&optional (state lcg128--state))
   "Return a random float in [0.0,1.0)."
-  (ldexp (lsh (lcg128--next state) -75) -53))
+  (ldexp (lsh (lcg128--next state) -64) -64))
 
 (cl-defun lcg128-bits (nbits &optional (state lcg128--state))
   "Return the next NBITS bits of the generator as an integer."
