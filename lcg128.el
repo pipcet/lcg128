@@ -57,7 +57,7 @@ returned unshifted for efficiency."
     (setf (car state) (logand n (+ a (* s m))))))
 
 (cl-defun lcg128-uniform (&optional (state lcg128--state))
-  "Return a random float in [0.0 – 1.0)."
+  "Return a random float in [0.0,1.0)."
   (ldexp (lsh (lcg128--next state) -75) -53))
 
 (cl-defun lcg128-bits (nbits &optional (state lcg128--state))
@@ -73,7 +73,7 @@ returned unshifted for efficiency."
               (lsh (lcg128--next state) (- rem 128))))))
 
 (cl-defun lcg128-range (limit &optional (state lcg128--state))
-  "Return a random integer in [0 – limit) without bias."
+  "Return a random integer in [0,limit) without bias."
   (let ((nbits (1+ (logb limit))))
     (cl-loop for result = (lcg128-bits nbits state)
              then (lcg128-bits nbits state)
