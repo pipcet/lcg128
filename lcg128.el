@@ -111,10 +111,12 @@ returned unshifted for efficiency."
 
 Mean is 0 and standard deviation is 1. The values are returned as
 the car and cdr of a cons cell."
-  (let ((x (lcg128-uniform state))
-        (y (lcg128-uniform state)))
-    (cons (* (sqrt (* -2 (log x))) (cos (* 2 pi y)))
-          (* (sqrt (* -2 (log x))) (sin (* 2 pi y))))))
+  (let* ((x (lcg128-uniform state))
+         (y (lcg128-uniform state))
+	 (r (sqrt (* -2 (log x))))
+	 (phi (* 2 pi y)))
+    (cons (* r (cos phi))
+          (* r (sin phi)))))
 
 (provide 'lcg128)
 
